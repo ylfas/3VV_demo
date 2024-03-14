@@ -33,7 +33,7 @@
 ### detection
 * python detect.py [--weights ./yolov5_detection/runs/train/exp/weight/best.pth] [--source ./dataset/test/] [--project ./3VV_demo/result/new_dataset/test/]
 
-### segmention
+### segmentation
 * python main_2th_stage.py [--arch deeplabv3_gai] [--dataset MyDataset] [--epoch 35] [--batch_size 16]
 * python trim_predict.py
 
@@ -68,9 +68,9 @@
 
 * 5.Finally, based on the paths of the newly generated datasets mentioned above, configure the paths for the new dataset in the MyDataset_trim class in '.../3VV_demo/dataset.py'. <br />
 
-* 6.In '.../3VV_demo/main2segment.py', set the save path for predicted images ('.../3VV_demo/result/2th_stage_seg/deeplabv3/') and the txt path required for restoring image sizes ('.../3VV_demo/result/new_dataset/test/txt/'). <br />
+* 6.In '.../3VV_demo/main2segmentation.py', set the save path for predicted images ('.../3VV_demo/result/2th_stage_seg/deeplabv3/') and the txt path required for restoring image sizes ('.../3VV_demo/result/new_dataset/test/txt/'). <br />
 
-* 7.Run 'python main2segment.py' to predict segmentation results in the second stage. <br />
+* 7.Run 'python main2segmentation.py' to predict segmentation results in the second stage. <br />
 
 * 8.In '.../3VV_demo/trim_predict.py', configure paths based on the segmentation prediction results path ('.../3VV_demo/result/2th_stage_seg/deeplabv3/') and the original full-size dataset path ('.../data/test/mask/'). <br />
 
