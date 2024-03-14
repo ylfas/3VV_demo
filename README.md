@@ -1,11 +1,8 @@
-# **Instructions**
-**Yolov5_detection is the ROI detection model training for yolov5: The code is from https://github.com/ultralytics/yolov5； <br />**
+# **A Deep Learning Framework for Identifying and Segmenting Three Vessels in Fetal Heart Ultrasound Images**
 
 ![image](https://github.com/ylfas/3VV_demo/assets/110209878/89eb2dce-78ab-4114-8c0e-2fb1d459719d)
 
-
-# **Task Description:** <br />
-* This project entails a two-stage deep learning framework for segmenting the three major blood vessel outlines in fetal cardiac three-vessel view ---- PA (pulmonary artery), Ao (aorta), SVC (superior vena cava)
+* In this study, we propose a deep learning-based framework for the identification and segmentation of the three vessels — the pulmonary artery, aorta, and superior vena cava — in the ultrasound three vessel view (3VV) of the fetal heart.  In the first stage of the framework, the object detection model Yolov5 is employed to identify the three vessels and localize the Region of Interest (ROI) within the original full-sized ultrasound images.  Subsequently, a modified Deeplabv3 equipped with our novel AMFF (Attentional Multi-scale Feature Fusion) module is applied in the second stage to segment the three vessels within the cropped ROI images.
 
 
 # **The framework's flowchart**
@@ -34,7 +31,6 @@
 ## **For application:**
 
 ### first detection
-* python train.py [--weights ./yolov5x.tmp] [--cfg ./yolov5s.yaml] [--data ./ab.yaml] [--batch-size 16] [--epoch 100]
 * python detect.py [--weights ./trained_yolo.pth] [--source ./dataset/test/] [--project ./pred_dir]
 
 ### second segmention
@@ -81,3 +77,5 @@
 * 9.Run 'python trim_predict.py' to complete the final evaluation of the 3VV results. <br />
 
 ****
+
+**Yolov5_detection is the ROI detection model training for yolov5: The code is from https://github.com/ultralytics/yolov5； <br />**
