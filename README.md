@@ -1,39 +1,83 @@
-yolov5_detection为yolov5的ROI检测模型训练：代码来自https://github.com/ultralytics/yolov5； <br />
+# **Instructions**
+**Yolov5_detection is the ROI detection model training for yolov5: The code is from https://github.com/ultralytics/yolov5； <br />**
 
-![76107801_3VV_m](https://github.com/ylfas/3VV_demo/assets/110209878/780afea3-4d77-4a46-be33-ef2cc00ee4c1 =100×20)
+![image](https://github.com/ylfas/3VV_demo/assets/110209878/89eb2dce-78ab-4114-8c0e-2fb1d459719d)
 
 
+# **Task Description:** <br />
+* This project entails a two-stage deep learning framework for segmenting the three major blood vessel outlines in fetal cardiac three-vessel view ---- PA (pulmonary artery), Ao (aorta), SVC (superior vena cava)
 
-**一阶段：** <br />
-1.在'.../yolov5_detection/data/ab.yaml 文件中进行检测数据集的路径设置 <br />
 
-2.在'.../yolov5_detection/train.py 文件中的配置路径，epoch数根据任务进行设定 <br />
+# **The framework's flowchart**
+![image](https://github.com/ylfas/3VV_demo/assets/110209878/86b7bdaf-624c-4fb7-b1ca-c411e69f7d73) <br />
 
-3.运行 python train.py 进行检测训练； <br />
+* We design a deep-learning based framework for the accurate segmentation of the three vessels within the three-vessel plane of the fetal heart, namely, the aorta, the pulmonary artery and the superior vena cava. <br />
+* In the first stage of the network framework, a detection model is employed to extract the Regions of Interest (ROIs) containing important regions in the image and perform cropping.
+* In the second stage of the network framework, an improved version of Deeplabv3 equipped with a multi-scale feature fusion module is utilized for fine segmentation of multiple categories of blood vessel outlines. <br />
 
-4.训练完成后，在'.../yolov5_detection/detect.py' 中，在'--weights'中输入训练好的权重文件路径 <br />
+****
 
-5.在detect.py中，调整参数'--conf-thres'，'--iou-thres'的阈值以获取更全面的检测效果，本文均设置为了0.3 <br />
+# **AMFF(Attentional Multi-scale Feature Fusion module)**
 
-6.在detect.py中，'--project'设置预测图的保存路径 <br />
+![image](https://github.com/ylfas/3VV_demo/assets/110209878/ce30518f-09c4-472e-b037-efa72af883d1) <br />
+* Accroding to the structure of AMFF module.  It consists of multiple feature extraction branches with convolutions of different dilation rates to obtain features with diverse receptive fields.  To ensure that each branch preserves small object features, we encourage interaction among branches by integrating features through hierarchical connections.  Furthermore, we introduce spatial attention operations to selectively enhance the most effective features of each branch, thereby improving feature representations at multiple scales.  Subsequently, the features from all branches are concatenated to create fused features that retain information related to multi-scale targets.  The fused feature (2048x32x32) is then dimensionally reduced to three channels through two convolutional layers, with each channel predicting one type of vessel.  Finally, the prediction is upsampled eight times through bilinear interpolation to restore it to the original image resolution.
 
-7.运行 python detect.py 完成测试集的ROI预测。 <br />
+# **Improved deeplabv3 model**
+![image](https://github.com/ylfas/3VV_demo/assets/110209878/9b1a3e04-0306-4c80-bc49-0b527a39f7b2)  <br />
 
-**二阶段：**
-1.在'.../3VV_demo/utils/detec_ROI_trim.py'中配置路径: 其中'predict_txt_path'为yolov5检测结果的txt文件，'full_size_img_path'为预测结果的路径，即上述在'--project'中设置的预测图的保存路径 <br />
+* The second stage of our framework is a modified Deeplabv3 equipped with our novel AMFF module for instance segmentation of the three vessels.   The AMMF’s architecture is illustrated.  A cascade of ResNet34 [18] blocks are used to encode image features.  To be concrete, the initial phase involves an initialization block, which consists of a 7x7 convolution with a stride of 2, a padding of 3, and a Batch Normalization (BN) layer.  Foll
 
-2.在detec_ROI_trim.py中，配置'full_size_img_path_all'为初始全尺寸数据集的路径，在该数据集的测试集上进行裁剪获取ROI提取的新测试集，并在最后设定裁剪坐标记录的txt文件储存路径（'.../3VV_demo/result/new_dataset/test/txt/'） <br />
 
-3.在detec_ROI_trim.py中，设定裁剪图像以及标签保存的路径（'.../3VV_demo/result/new_dataset/test/img（mask）/'） <br />
+****
+# **Usage**
 
-4.接着，在'.../3VV_demo/utils/label_ROI_trim.py'中配置路径，包括初始全尺寸数据集的训练集和验证集路径，以生成第二阶段中分割网络的新训练集以及测试集； <br />
+## **For application:**
 
-5.最终根据上述新生成的数据集路径，在 '.../3VV_demo/dataset.py'中的MyDataset_trim类上配置新数据集的路径 <br />
+### first detection
+* python train.py [--weights ./yolov5x.tmp] [--cfg ./yolov5s.yaml] [--data ./ab.yaml] [--batch-size 16] [--epoch 100]
+* python detect.py [--weights ./trained_yolo.pth] [--source ./dataset/test/] [--project ./pred_dir]
 
-6.在'.../3VV_demo/main_2th_stage.py'中设置预测图像的保存路径（'.../3VV_demo/result/2th_stage_seg/deeplabv3/'）以及恢复图像尺寸所需要的txt路径设置（'.../3VV_demo/result/new_dataset/test/txt/'） <br />
+### second segmention
+* python python main_2th_stage.py [--arch deeplabv3_gai] [--dataset MyDataset] [--epoch 35] [--batch_size 16]
+* python trim_predict.py
 
-7.运行 python main_2th_stage.py进行二阶段的分割结果预测 <br />
 
-8.在'.../3VV_demo/trim_predict.py'中根据分割预测结果的路径（'.../3VV_demo/result/2th_stage_seg/deeplabv3/'）以及原全尺寸数据集路径（'.../data/test/mask/'）进行路径配置 <br />
+****
+## **For training and testing：**
 
-9.运行 python trim_predict.py，完成3VV结果的最终评估。 <br />
+### **First stage：** <br />
+* 1.Set the path for the detection dataset in the '.../yolov5_detection/data/ab.yaml' file. <br /> 
+
+* 2.Configure the paths in the '.../yolov5_detection/train.py' file and set the number of epochs according to the task. <br />
+
+* 3.Run 'python train.py' for detection training. <br />
+
+* 4.After training completion, in '.../yolov5_detection/detect.py', input the path of the trained weight file in '--weights'. <br />
+
+* 5.In detect.py, adjust the thresholds of '--conf-thres' and '--iou-thres' to achieve a more comprehensive detection effect. <br />
+
+* 6.In detect.py, set the '--project' to save the predicted images. <br />
+
+* 7.Run 'python detect.py' to complete ROI prediction on the test set. <br />
+
+
+### **Second stage：**
+* 1.Configure paths in '.../3VV_demo/utils/detec_ROI_trim.py': 'predict_txt_path' represents the path to the yolov5 detection result txt file, and 'full_size_img_path' denotes the path to the predicted results, i.e., the save path set in '--project' for predicted images. <br />
+
+* 2.In detec_ROI_trim.py, set 'full_size_img_path_all' as the path to the initial full-size dataset, where the new test set for ROI extraction is obtained by cropping on the test set of this dataset. Finally, specify the path for storing the txt file recording the cropping coordinates ('.../3VV_demo/result/new_dataset/test/txt/'). <br />
+
+* 3.In detec_ROI_trim.py, specify the paths for saving the cropped images and labels ('.../3VV_demo/result/new_dataset/test/img(mask)/'). <br />
+
+* 4.Next, configure paths in '.../3VV_demo/utils/label_ROI_trim.py', including the paths to the training and validation sets of the initial full-size dataset, to generate new training and test sets for the segmentation network in the second stage. <br />
+
+* 5.Finally, based on the paths of the newly generated datasets mentioned above, configure the paths for the new dataset in the MyDataset_trim class in '.../3VV_demo/dataset.py'. <br />
+
+* 6.In '.../3VV_demo/main_2th_stage.py', set the save path for predicted images ('.../3VV_demo/result/2th_stage_seg/deeplabv3/') and the txt path required for restoring image sizes ('.../3VV_demo/result/new_dataset/test/txt/'). <br />
+
+* 7.Run 'python main_2th_stage.py' to predict segmentation results in the second stage. <br />
+
+* 8.In '.../3VV_demo/trim_predict.py', configure paths based on the segmentation prediction results path ('.../3VV_demo/result/2th_stage_seg/deeplabv3/') and the original full-size dataset path ('.../data/test/mask/'). <br />
+
+* 9.Run 'python trim_predict.py' to complete the final evaluation of the 3VV results. <br />
+
+****
