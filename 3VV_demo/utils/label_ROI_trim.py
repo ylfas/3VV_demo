@@ -2,7 +2,7 @@ import os
 import cv2
 import numpy as np
 
-full_size_img_path = '/data/ylf/data/val/img/'
+full_size_img_path = '.../data/val/img/'
 
 for img in os.listdir(full_size_img_path):
     if img.split('.')[-1] == 'jpg':
@@ -52,6 +52,6 @@ for img in os.listdir(full_size_img_path):
         cropped_image = image[min_y:max_y, min_x:max_x]
         cropped_mask = mask[min_y:max_y, min_x:max_x]
 
-        cv2.imwrite("/data/ylf/3VV_demo/result/new_dataset/val/img/" + img, cropped_image)
-        cv2.imwrite("/data/ylf/3VV_demo/result/new_dataset/val/mask/" + img.replace('.jpg', '.png'), cropped_mask)
+        cv2.imwrite(".../3VV_demo/result/new_dataset/val/img/" + img, cropped_image)
+        cv2.imwrite(".../3VV_demo/result/new_dataset/val/mask/" + img.replace('.jpg', '.png'), cropped_mask)
 
