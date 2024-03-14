@@ -31,10 +31,10 @@
 ## **For application:**
 
 ### first detection
-* python detect.py [--weights ./trained_yolo.pth] [--source ./dataset/test/] [--project ./pred_dir]
+* python detect.py [--weights ./yolov5_detection/runs/train/exp/weight/best.pth] [--source ./dataset/test/] [--project ./3VV_demo/result/new_dataset/test/]
 
 ### second segmention
-* python python main_2th_stage.py [--arch deeplabv3_gai] [--dataset MyDataset] [--epoch 35] [--batch_size 16]
+* python main_2th_stage.py [--arch deeplabv3_gai] [--dataset MyDataset] [--epoch 35] [--batch_size 16]
 * python trim_predict.py
 
 
