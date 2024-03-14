@@ -29,10 +29,7 @@
 # **Usage**
 
 ## **For directed application:**
-If you want to use our pre-trained model on your own dataset, please follow the steps below in order. Before usage, make sure to prepare your dataset in the following format: <br /> 
-
-![image](https://github.com/ylfas/3VV_demo/assets/110209878/40c8a67d-aaff-495d-bcd3-c9a3f339c994) <br />
-
+If you want to use our pre-trained model on your own dataset, please follow the steps below in order. Before usage, you should put your dataset images in './dataset/test/'. Then, you should run the following two codes. And last, the prediction result will in './3VV_demo/result/new_dataset/test/'.
 
 * python detect.py [--weights ./yolov5_detection/runs/train/exp/weight/best.pth] [--source ./dataset/test/] [--project ./3VV_demo/result/new_dataset/test/]
 * python main2segmentation.py [--arch deeplabv3_gai] [--dataset MyDataset] [--epoch 35] [--batch_size 16] <br />
@@ -41,7 +38,9 @@ The first line of code is for detecting ROI areas and performing cropping. The s
 
 ****
 ## **For training and testing：** <br /> 
-If you wish to retrain the model on your own dataset, please follow the steps below to configure the parameters. And the dataset format should same as above <br /> 
+If you wish to retrain the model on your own dataset, please follow the steps below to configure the parameters.  Before training, make sure to prepare your dataset in the following format: <br /> 
+
+![image](https://github.com/ylfas/3VV_demo/assets/110209878/40c8a67d-aaff-495d-bcd3-c9a3f339c994) <br />
 
 ### **First stage：** <br />
 * 1.Set the path for the detection dataset in the '.../yolov5_detection/data/ab.yaml' file. <br /> 
