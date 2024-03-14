@@ -80,7 +80,7 @@ for img in os.listdir(full_size_img_path):
             cv2.imwrite("/data/ylf/3VV_demo/result/new_dataset/test/mask/" + img.replace('.jpg', '.png'), cropped_mask)
 
 
-            with open('/data/ylf/3VV_demo/result/new_dataset/test/txt/' + img.replace('.jpg', '.txt'), 'w') as t:
+            with open('.../3VV_demo/result/new_dataset/test/txt/' + img.replace('.jpg', '.txt'), 'w') as t:
                 t.write(str(left_top[0]) + ' ' + str(left_top[1]) + ' ' + str(right_bottom[0]) + ' ' + str(right_bottom[1]))
             t.close()
 
