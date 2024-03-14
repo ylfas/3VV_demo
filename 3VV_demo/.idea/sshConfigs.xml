@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig host="127.0.0.1" id="a56fafcd-2fbe-4402-8b38-fff8fc1dcb64" keyPath="C:\Users\lenovo\ssh_key\ssh-key" port="5002" nameFormat="DESCRIPTIVE" username="t9kuser" useOpenSSHConfig="true" />
+    </configs>
+  </component>
+</project>

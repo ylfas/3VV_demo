@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="zhyl_ylf@192.168.123.241:22 password" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="t9kuser@127.0.0.1:5002">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/t9k/mnt/JBHI_3VV_revision1" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="t9kuser@127.0.0.1:5002 key">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="zhyl_ylf@192.168.123.241:22 password">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/data/ylf/3VV_demo" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>
