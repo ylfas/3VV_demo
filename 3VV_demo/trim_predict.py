@@ -7,8 +7,8 @@ from utils1 import *
 from metrics import get_iou_3trim, get_hd_3rtim
 import torchvision.transforms as transforms
 
-mask_path = '/data/ylf/data/test/mask/'
-predict_path = '/data/ylf/3VV_demo/result/2th_stage_seg/deeplabv3/'
+mask_path = '.../data/test/mask/'
+predict_path = '.../3VV_demo/result/2th_stage_seg/deeplabv3/'
 
 resize = transforms.Resize((256, 256))
 
