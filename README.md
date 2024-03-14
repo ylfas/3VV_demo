@@ -28,18 +28,20 @@
 ****
 # **Usage**
 
-## **For directing application:**
+## **For directed application:**
+If you want to use our pre-trained model on your own dataset, please follow the steps below in order. Before usage, make sure to prepare your dataset in the following format: <br /> 
 
-### detection
+![image](https://github.com/ylfas/3VV_demo/assets/110209878/40c8a67d-aaff-495d-bcd3-c9a3f339c994) <br />
+
+
 * python detect.py [--weights ./yolov5_detection/runs/train/exp/weight/best.pth] [--source ./dataset/test/] [--project ./3VV_demo/result/new_dataset/test/]
+* python main2segmentation.py [--arch deeplabv3_gai] [--dataset MyDataset] [--epoch 35] [--batch_size 16] <br />
 
-### segmentation
-* python main_2th_stage.py [--arch deeplabv3_gai] [--dataset MyDataset] [--epoch 35] [--batch_size 16]
-* python trim_predict.py
-
+The first line of code is for detecting ROI areas and performing cropping. The second line of code is for segmenting the three blood vessels.
 
 ****
-## **For training and testing：**
+## **For training and testing：** <br /> 
+If you wish to retrain the model on your own dataset, please follow the steps below to configure the parameters. And the dataset format should same as above <br /> 
 
 ### **First stage：** <br />
 * 1.Set the path for the detection dataset in the '.../yolov5_detection/data/ab.yaml' file. <br /> 
@@ -55,7 +57,6 @@
 * 6.In detect.py, set the '--project' to save the predicted images. <br />
 
 * 7.Run 'python detect.py' to complete ROI prediction on the test set. <br />
-
 
 ### **Second stage：**
 * 1.Configure paths in '.../3VV_demo/utils/detec_ROI_trim.py': 'predict_txt_path' represents the path to the yolov5 detection result txt file, and 'full_size_img_path' denotes the path to the predicted results, i.e., the save path set in '--project' for predicted images. <br />
