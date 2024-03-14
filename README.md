@@ -22,18 +22,18 @@
 # **Improved deeplabv3 model**
 ![image](https://github.com/ylfas/3VV_demo/assets/110209878/9b1a3e04-0306-4c80-bc49-0b527a39f7b2)  <br />
 
-* The second stage of our framework is a modified Deeplabv3 equipped with our novel AMFF module for instance segmentation of the three vessels.   The AMMF’s architecture is illustrated.  A cascade of ResNet34 [18] blocks are used to encode image features.  To be concrete, the initial phase involves an initialization block, which consists of a 7x7 convolution with a stride of 2, a padding of 3, and a Batch Normalization (BN) layer.  Foll
+* The second stage of our framework is a modified Deeplabv3 equipped with our novel AMFF module for instance segmentation of the three vessels.   The AMMF’s architecture is illustrated.  A cascade of ResNet34 blocks are used to encode image features.  To be concrete, the initial phase involves an initialization block, which consists of a 7x7 convolution with a stride of 2, a padding of 3, and a Batch Normalization (BN) layer. 
 
 
 ****
 # **Usage**
 
-## **For application:**
+## **For directing application:**
 
-### first detection
+### detection
 * python detect.py [--weights ./yolov5_detection/runs/train/exp/weight/best.pth] [--source ./dataset/test/] [--project ./3VV_demo/result/new_dataset/test/]
 
-### second segmention
+### segmention
 * python main_2th_stage.py [--arch deeplabv3_gai] [--dataset MyDataset] [--epoch 35] [--batch_size 16]
 * python trim_predict.py
 
@@ -68,9 +68,9 @@
 
 * 5.Finally, based on the paths of the newly generated datasets mentioned above, configure the paths for the new dataset in the MyDataset_trim class in '.../3VV_demo/dataset.py'. <br />
 
-* 6.In '.../3VV_demo/main_2th_stage.py', set the save path for predicted images ('.../3VV_demo/result/2th_stage_seg/deeplabv3/') and the txt path required for restoring image sizes ('.../3VV_demo/result/new_dataset/test/txt/'). <br />
+* 6.In '.../3VV_demo/main2segment.py', set the save path for predicted images ('.../3VV_demo/result/2th_stage_seg/deeplabv3/') and the txt path required for restoring image sizes ('.../3VV_demo/result/new_dataset/test/txt/'). <br />
 
-* 7.Run 'python main_2th_stage.py' to predict segmentation results in the second stage. <br />
+* 7.Run 'python main2segment.py' to predict segmentation results in the second stage. <br />
 
 * 8.In '.../3VV_demo/trim_predict.py', configure paths based on the segmentation prediction results path ('.../3VV_demo/result/2th_stage_seg/deeplabv3/') and the original full-size dataset path ('.../data/test/mask/'). <br />
 
