@@ -26,11 +26,11 @@ def find_min_max_coordinates(detections):
     return min_x, min_y, max_x, max_y
 
 
-predict_txt_path = r'/data/ylf/yolo_demo/runs/detect/exp4/labels/'
+predict_txt_path = r'.../yolo_demo/runs/detect/exp4/labels/'
 
-full_size_img_path = '/data/ylf/yolo_demo/runs/detect/exp4/test/'
+full_size_img_path = '.../yolo_demo/runs/detect/exp4/test/'
 
-full_size_img_path_all = '/data/ylf/data/test/img/'
+full_size_img_path_all = '.../data/test/img/'
 
 for img in os.listdir(full_size_img_path):
     if img.split('.')[-1] == 'jpg':
