@@ -76,8 +76,8 @@ for img in os.listdir(full_size_img_path):
             cropped_image = image[left_top[1]:right_bottom[1], left_top[0]:right_bottom[0]]
             cropped_mask = mask[left_top[1]:right_bottom[1], left_top[0]:right_bottom[0]]
 
-            cv2.imwrite("/data/ylf/3VV_demo/result/new_dataset/test/img/" + img, cropped_image)
-            cv2.imwrite("/data/ylf/3VV_demo/result/new_dataset/test/mask/" + img.replace('.jpg', '.png'), cropped_mask)
+            cv2.imwrite(".../3VV_demo/result/new_dataset/test/img/" + img, cropped_image)
+            cv2.imwrite(".../3VV_demo/result/new_dataset/test/mask/" + img.replace('.jpg', '.png'), cropped_mask)
 
 
             with open('.../3VV_demo/result/new_dataset/test/txt/' + img.replace('.jpg', '.txt'), 'w') as t:
