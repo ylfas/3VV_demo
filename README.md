@@ -1,8 +1,7 @@
 yolov5_detection为yolov5的ROI检测模型训练：代码来自https://github.com/ultralytics/yolov5； <br />
 
-![76107801_3VV_m](./pic/pic1_50.png =100x100)  ![76107801_3VV_m](https://github.com/ylfas/3VV_demo/assets/110209878/6b738b15-b75a-41c9-aee2-092de8c109fe)
+![76107801_3VV_m](https://github.com/ylfas/3VV_demo/assets/110209878/780afea3-4d77-4a46-be33-ef2cc00ee4c1 =100×20)
 
-![]()
 
 
 **一阶段：** <br />
