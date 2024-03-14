@@ -29,7 +29,7 @@
 # **Usage**
 
 ## **For directed application:**
-If you want to use our pre-trained model on your own dataset, please follow the steps below in order. Before usage, you should put your dataset images in './dataset/test/'. Then, you should run the following two codes. And last, the prediction result will in './3VV_demo/result/new_dataset/test/'.
+If you want to use our pre-trained model on your own dataset, please follow the steps below in order. Before usage, you need to place your own images for segmentation prediction in the path './dataset/test/'. Then, execute the following two lines of code. Finally, the segmented results will be saved in the './3VV_demo/result/new_dataset/test/' directory.
 
 * python detect.py [--weights ./yolov5_detection/runs/train/exp/weight/best.pth] [--source ./dataset/test/] [--project ./3VV_demo/result/new_dataset/test/]
 * python main2segmentation.py [--arch deeplabv3_gai] [--dataset MyDataset] [--epoch 35] [--batch_size 16] <br />
